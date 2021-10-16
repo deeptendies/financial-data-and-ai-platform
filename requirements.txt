@@ -1,0 +1,4 @@
+pandas
+seaborn
+mysql-connector-python
+yfinance
