@@ -1,0 +1,50 @@
+dag_bag_meme_stonks:
+  description: 'dags for extracting 5 tickers'
+  source: 'av-daily'
+  start: '2021-01-01' # start is for the alpha vantage api's start
+  start_date: '2021-01-01'
+  schedule: '0 * * * *'
+  tickers:
+    - GME
+    - AMC
+    - CLOV
+
+dag_bag_3x_finn:
+  description: 'dags for extracting 5 tickers'
+  source: 'av-daily'
+  start: '2021-01-01'
+  start_date: '2021-01-01'
+  schedule: '1 * * * *'
+  tickers:
+    - FAS
+    - FAZ
+
+dag_bag_3x_qqq:
+  description: 'dags for extracting 5 tickers'
+  source: 'av-daily'
+  start: '2021-01-01'
+  start_date: '2021-01-01'
+  schedule: '2 * * * *'
+  tickers:
+    - SQQQ
+    - TQQQ
+
+dag_bag_3_3x_chinese:
+  description: 'dags for extracting 5 tickers'
+  source: 'av-daily'
+  start: '2021-01-01'
+  start_date: '2021-01-01'
+  schedule: '3 * * * *'
+  tickers:
+    - YINN
+    - YANG
+
+dag_bag_3_3x_vix:
+  description: 'dags for extracting 5 tickers'
+  source: 'av-daily'
+  start: '2021-01-01'
+  start_date: '2021-01-01'
+  schedule: '4 * * * *'
+  tickers:
+    - UVXY
+    - SVXY
