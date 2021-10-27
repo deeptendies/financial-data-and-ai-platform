@@ -1,4 +1,4 @@
-dag_bag_meme_stonks:
+av_ingest_meme_stonks:
   description: 'dags for extracting 5 tickers'
   source: 'av-daily'
   start: '2021-01-01' # start is for the alpha vantage api's start
@@ -8,8 +8,10 @@ dag_bag_meme_stonks:
     - GME
     - AMC
     - CLOV
+    - BBBY
+    - SNDL
 
-dag_bag_3x_finn:
+av_ingest_3x_fin_etf:
   description: 'dags for extracting 5 tickers'
   source: 'av-daily'
   start: '2021-01-01'
@@ -19,7 +21,7 @@ dag_bag_3x_finn:
     - FAS
     - FAZ
 
-dag_bag_3x_qqq:
+av_ingest_3x_qqq_etf:
   description: 'dags for extracting 5 tickers'
   source: 'av-daily'
   start: '2021-01-01'
@@ -29,7 +31,7 @@ dag_bag_3x_qqq:
     - SQQQ
     - TQQQ
 
-dag_bag_3_3x_chinese:
+av_ingest_3x_cn_etf:
   description: 'dags for extracting 5 tickers'
   source: 'av-daily'
   start: '2021-01-01'
@@ -39,7 +41,7 @@ dag_bag_3_3x_chinese:
     - YINN
     - YANG
 
-dag_bag_3_3x_vix:
+av_ingest_3x_vix:
   description: 'dags for extracting 5 tickers'
   source: 'av-daily'
   start: '2021-01-01'
