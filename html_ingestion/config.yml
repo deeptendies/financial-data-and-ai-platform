@@ -1,0 +1,6 @@
+yahoo_most_active_200:
+  description: 'scrape and ingest yahoo most active 200'
+  start_date: '2021-01-01'
+  schedule: '0 * * * *'
+  url:
+    https://finance.yahoo.com/most-active?offset=0&count=200

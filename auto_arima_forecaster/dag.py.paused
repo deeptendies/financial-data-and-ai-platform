@@ -1,0 +1,120 @@
+import logging
+import os
+from datetime import datetime
+from datetime import timedelta
+
+import pandas_datareader as pdr
+import yaml
+from airflow import DAG
+from airflow.hooks.base import BaseHook
+from airflow.operators.python import PythonOperator
+from sqlalchemy.engine.url import URL
+import pandas as pd
+
+# pull connection from airflow
+pg_conn = BaseHook.get_connection("deeptendies_postgres")
+
+# Defining pgURL
+
+postgres_db = {'drivername': 'postgresql',
+               'username': (pg_conn.login),
+               'password': (pg_conn.password),
+               'host': (pg_conn.host),
+               'port': 5432,
+               'database': 'shared_sandbox'}
+pgURL = URL(**postgres_db)
+
+# pg engine
+from sqlalchemy import create_engine
+
+engine = create_engine(pgURL)
+
+# auto arima libs
+import pmdarima as pm
+from pmdarima import model_selection
+from pmdarima.arima import ndiffs
+from pandas.tseries.offsets import *
+
+
+def auto_arima(ticker,
+               schema="feature_engineering",
+               *args, **kwargs):
+    df = pd.read_sql(f"SELECT * FROM \"{schema}\".\"{ticker}\"",
+                     con=engine,
+                     # index_col='index'
+                     )
+    df['index'] = pd.to_datetime(df['index'])
+    new_index = (df['index'] + BDay(14))[-14:]
+
+    df_temp_1 = pd.DataFrame(new_index,
+                             columns=['index'])
+    for metric in ['high_diff', 'low_diff']:
+        data = df[metric].dropna()
+        kpss_diffs = ndiffs(data, alpha=0.05, test='kpss', max_d=6)
+        adf_diffs = ndiffs(data, alpha=0.05, test='adf', max_d=6)
+        n_diffs = max(adf_diffs, kpss_diffs)
+
+        arima = pm.auto_arima(y=data.dropna(),
+                              start_p=0, d=1, start_q=0,
+                              max_p=5, max_d=5, max_q=5, start_P=0,
+                              D=1, start_Q=0, max_P=5, max_D=5,
+                              max_Q=5, m=12, seasonal=True,
+                              error_action='warn', trace=True,
+                              supress_warnings=True, stepwise=True,
+                              random_state=20, n_fits=50
+                              )
+        new_data = arima.predict(14)
+        df_temp_2 = pd.DataFrame(list(zip(new_index, new_data)),
+                                 columns=['index', f'{metric}_forecast'])
+        # print(df_temp_2.head())
+
+        df_temp_1 = pd.merge(df_temp_1, df_temp_2, on='index')
+        print(df_temp_1)
+    df_temp_1.to_sql(name=ticker,
+                     con=engine,
+                     schema='auto_arima_forecasts',
+                     if_exists='replace',
+                     method='multi')
+
+
+# create dags logic
+def create_dag(dag_id,
+               schedule,
+               config,
+               default_args):
+    dag = DAG(dag_id,
+              schedule_interval=schedule,
+              default_args=default_args,
+              tags=['dev', 'feature-engineering', 'etl'],
+              catchup=False)
+
+    tickers = config['tickers']
+
+    # generate one task per ticker
+    with dag:
+        for ticker in tickers:
+            PythonOperator(
+                task_id=f'stock_data_ingestion_operator_{ticker}',
+                python_callable=auto_arima,
+                op_kwargs={'ticker': ticker}
+            )
+    return dag
+
+
+# reading configs from config.yml
+pwd = os.path.split(__file__)[0]
+with open(os.path.join(pwd, "config.yml"), "r") as config_yaml:
+    dag_configs = yaml.load(config_yaml, Loader=yaml.FullLoader)
+
+for config in dag_configs:
+    dag_id = 'auto_arima_forecaster_{}'.format(str(config))
+    default_args = {'owner': 'deeptendies',
+                    'start_date': datetime(2021, 11, 1),
+                    'retries': 3,
+                    'retry_delay': timedelta(minutes=10),
+                    }
+    schedule = dag_configs[config]['schedule']
+    globals()[dag_id] = create_dag(dag_id,
+                                   schedule,
+                                   dag_configs[config],
+                                   default_args)

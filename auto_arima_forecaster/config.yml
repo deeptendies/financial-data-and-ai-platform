@@ -3,7 +3,7 @@ meme_stonks:
   source: 'av-daily'
   start: '2021-01-01'
   start_date: '2021-01-01'
-  schedule: '0 0 * * *'
+  schedule: '0 3 * * *'
   tickers:
     - TSLA
     - CRSR
@@ -16,7 +16,7 @@ meme_stonks:
   source: 'av-daily'
   start: '2021-01-01'
   start_date: '2021-01-01'
-  schedule: '1 0 * * *'
+  schedule: '1 4 * * *'
   tickers:
     - FAS
     - FAZ
@@ -26,7 +26,7 @@ meme_stonks:
   source: 'av-daily'
   start: '2021-01-01'
   start_date: '2021-01-01'
-  schedule: '2 0 * * *'
+  schedule: '2 5 * * *'
   tickers:
     - SQQQ
     - TQQQ
@@ -36,7 +36,7 @@ meme_stonks:
   source: 'av-daily'
   start: '2021-01-01'
   start_date: '2021-01-01'
-  schedule: '3 0 * * *'
+  schedule: '3 6 * * *'
   tickers:
     - YINN
     - YANG
@@ -46,7 +46,7 @@ meme_stonks:
   source: 'av-daily'
   start: '2021-01-01'
   start_date: '2021-01-01'
-  schedule: '4 0 * * *'
+  schedule: '4 7 * * *'
   tickers:
     - UVXY
     - SVXY
@@ -57,7 +57,7 @@ scion_asset_management_1:
   source: 'av-daily'
   start: '2021-01-01'
   start_date: '2021-01-01'
-  schedule: '11 0 * * *'
+  schedule: '11 8 * * *'
   tickers:
     - VYGG
     - GOGL
@@ -71,7 +71,7 @@ scion_asset_management_2:
   source: 'av-daily'
   start: '2021-01-01'
   start_date: '2021-01-01'
-  schedule: '12 0 * * *'
+  schedule: '12 9 * * *'
   tickers:
     - GEO
     - OVV
