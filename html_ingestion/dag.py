@@ -39,6 +39,14 @@ import pandas as pd
 def html_to_df(url):
     table=pd.read_html(url)
     df = table[0]
+
+    # additional logics to fix faulty ingestion
+    if 'Unnamed: 0' in df.columns:
+        adj = 0
+        while 'Unnamed: 0' in df.columns:
+            adj += 1
+            table = pd.read_html(url, header = adj)
+            df = table[0]
     return df
 
 def ingest_html_operator(url):
@@ -54,12 +62,17 @@ def ingest_html_operator(url):
 
 def execute(topic_name,
             url,
-            schema="yahoo_ingestion",
+            schema="html_ingestion",
             *args, **kwargs):
     import re
     from datetime import date
     df = ingest_html_operator(url)
-    df.columns = [re.sub(r'\W+', '', x) for x in df.columns]
+    try:
+        df.columns = [re.sub(r'\W+', '', str(x)) for x in df.columns]
+        print("sanitize columns succeed")
+    except:
+        print("sanitize columns failed")
+        pass
     date = date.today().strftime("%Y_%m_%d")
     df.to_sql(name=f"{topic_name}_{date}",
               con=engine,
