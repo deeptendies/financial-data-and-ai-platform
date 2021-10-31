@@ -73,7 +73,7 @@ with open(os.path.join(pwd, "config.yml"), "r") as config_yaml:
     dag_configs = yaml.load(config_yaml, Loader=yaml.FullLoader)
 
 for config in dag_configs:
-    dag_id = 'dag_stock_data_ingestion_{}'.format(str(config))
+    dag_id = 'av_ingest_{}'.format(str(config))
     default_args = {'owner': 'apecrews',
                     'start_date': datetime(2021, 1, 1),
                     'retries': 5,
