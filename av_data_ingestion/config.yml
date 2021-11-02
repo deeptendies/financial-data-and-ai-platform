@@ -1,18 +1,18 @@
 meme_stonks:
-  description: 'dags for extracting 5 tickers'
+  description: 'dags for extracting meme stonks tickers'
   source: 'av-daily'
-  start: '2021-01-01' # start is for the alpha vantage api's start
+  start: '2021-01-01'
   start_date: '2021-01-01'
   schedule: '0 * * * *'
   tickers:
-    - GME
-    - AMC
+    - TSLA
+    - CRSR
     - CLOV
     - BBBY
-    - SNDL
+    - IVR
 
 3x_fin_etf:
-  description: 'dags for extracting 5 tickers'
+  description: 'dags for extracting 3x leveraged etf tickers'
   source: 'av-daily'
   start: '2021-01-01'
   start_date: '2021-01-01'
@@ -22,7 +22,7 @@ meme_stonks:
     - FAZ
 
 3x_qqq_etf:
-  description: 'dags for extracting 5 tickers'
+  description: 'dags for extracting 3x bear bull tickers'
   source: 'av-daily'
   start: '2021-01-01'
   start_date: '2021-01-01'
@@ -50,3 +50,31 @@ meme_stonks:
   tickers:
     - UVXY
     - SVXY
+
+
+scion_asset_management_1:
+  description: 'Fund by Michael Burry'
+  source: 'av-daily'
+  start: '2021-01-01'
+  start_date: '2021-01-01'
+  schedule: '11 * * * *'
+  tickers:
+    - VYGG
+    - GOGL
+    - MRNS
+    - STNG
+    - CVS
+
+
+scion_asset_management_2:
+  description: 'Fund by Michael Burry'
+  source: 'av-daily'
+  start: '2021-01-01'
+  start_date: '2021-01-01'
+  schedule: '12 * * * *'
+  tickers:
+    - GEO
+    - OVV
+    - DISCA
+    - WMT
+    - MCK
