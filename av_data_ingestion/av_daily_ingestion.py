@@ -51,7 +51,7 @@ def create_dag(dag_id,
     dag = DAG(dag_id,
               schedule_interval=schedule,
               default_args=default_args,
-              tags=['dev'],
+              tags=['dev', 'ingestion', 'alpha-vantage'],
               catchup=False)
 
     tickers = config['tickers']
