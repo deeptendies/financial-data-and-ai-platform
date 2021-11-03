@@ -4,6 +4,42 @@ yahoo_most_active_200:
   schedule: '0 * * * *'
   url:
     https://finance.yahoo.com/most-active?offset=0&count=200
+yahoo_gainers_200:
+  description: 'scrape and ingest yahoo_gainers_200'
+  start_date: '2021-01-01'
+  schedule: '0 * * * *'
+  url:
+    https://finance.yahoo.com/gainers?_device=desktop&count=200
+yahoo_losers_200:
+  description: 'scrape and ingest yahoo_losers_200'
+  start_date: '2021-01-01'
+  schedule: '0 * * * *'
+  url:
+    https://finance.yahoo.com/losers/?offset=0&count=200
+yahoo_trending_tickers:
+  description: 'scrape and ingest yahoo_losers_200'
+  start_date: '2021-01-01'
+  schedule: '0 * * * *'
+  url:
+    https://finance.yahoo.com/trending-tickers/
+yahoo_top_etfs_us:
+  description: 'scrape and ingest yahoo_losers_200'
+  start_date: '2021-01-01'
+  schedule: '0 * * * *'
+  url:
+    https://finance.yahoo.com/etfs
+yahoo_options_highest_open_interest:
+  description: 'scrape and ingest yahoo_losers_200'
+  start_date: '2021-01-01'
+  schedule: '0 * * * *'
+  url:
+    https://finance.yahoo.com/options/highest-open-interest
+yahoo_options_hii:
+  description: 'scrape and ingest yahoo_losers_200'
+  start_date: '2021-01-01'
+  schedule: '0 * * * *'
+  url:
+    https://finance.yahoo.com/options/highest-implied-volatility
 deeptendies_meme_stonks_tracker:
   description: 'deeptendies_meme_stonks_tracker'
   start_date: '2021-01-01'

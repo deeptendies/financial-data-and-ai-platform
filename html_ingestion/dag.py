@@ -39,14 +39,6 @@ import pandas as pd
 def html_to_df(url):
     table=pd.read_html(url)
     df = table[0]
-
-    # additional logics to fix faulty ingestion
-    if 'Unnamed: 0' in df.columns:
-        adj = 0
-        while 'Unnamed: 0' in df.columns:
-            adj += 1
-            table = pd.read_html(url, header = adj)
-            df = table[0]
     return df
 
 def ingest_html_operator(url):
