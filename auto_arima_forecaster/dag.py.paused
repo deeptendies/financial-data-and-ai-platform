@@ -94,7 +94,7 @@ def create_dag(dag_id,
     with dag:
         for ticker in tickers:
             PythonOperator(
-                task_id=f'stock_data_ingestion_operator_{ticker}',
+                task_id=f'operator_{ticker}',
                 python_callable=auto_arima,
                 op_kwargs={'ticker': ticker}
             )

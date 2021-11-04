@@ -40,9 +40,10 @@ def dump_connections(**kwargs):
     print(df.head())
     print(dest.head())
     df[~df.conn_id.isin(dest.conn_id)].to_sql(name=table_name,
-              con=engine,
-              schema=schema,
-              if_exists='append')
+                                              con=engine,
+                                              schema=schema,
+                                              index=False,
+                                              if_exists='append')
 
 
 with DAG(

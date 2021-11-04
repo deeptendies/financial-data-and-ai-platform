@@ -2,6 +2,7 @@ import logging
 import os
 from datetime import datetime
 from datetime import timedelta
+from datetime import timezone
 
 import pandas_datareader as pdr
 import yaml
@@ -36,10 +37,13 @@ from pmdarima.arima import ndiffs
 from pandas.tseries.offsets import *
 
 import pandas as pd
+
+
 def html_to_df(url):
-    table=pd.read_html(url)
+    table = pd.read_html(url)
     df = table[0]
     return df
+
 
 def ingest_html_operator(url):
     try:
@@ -47,14 +51,16 @@ def ingest_html_operator(url):
     except:
         import pandas as pd
         import requests
-        r = requests.get(url,headers ={'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'})
+        r = requests.get(url, headers={
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'})
         table = pd.read_html(r.text)
         df = table[0]
     return df
 
+
 def execute(topic_name,
             url,
-            schema="html_ingestion",
+            schema="yahoo_html_ingestion",
             *args, **kwargs):
     import re
     from datetime import date
@@ -65,11 +71,15 @@ def execute(topic_name,
     except:
         print("sanitize columns failed")
         pass
-    date = date.today().strftime("%Y_%m_%d")
-    df.to_sql(name=f"{topic_name}_{date}",
+    date_str = date.today().strftime("%Y_%m_%d")
+    topic_name = topic_name.replace("-", "_").lower()
+
+    df['created_timestamp'] = datetime.now(tz=timezone.utc)
+    df.to_sql(name=f"{topic_name}",
               con=engine,
               schema=schema,
-              if_exists='replace',
+              index=False,
+              if_exists='append',
               method='multi')
 
 
@@ -88,12 +98,12 @@ def create_dag(topic_name,
 
     # generate one task per ticker
     with dag:
-            ops = PythonOperator(
-                task_id=f'stock_data_ingestion_operator_{topic_name}',
-                python_callable=execute,
-                op_kwargs={'topic_name': topic_name,
-                           'url': url}
-            )
+        ops = PythonOperator(
+            task_id=f'operator_{topic_name}',
+            python_callable=execute,
+            op_kwargs={'topic_name': topic_name,
+                       'url': url}
+        )
     return dag
 
 
@@ -107,7 +117,7 @@ with open(os.path.join(pwd, "config.yml"), "r") as config_yaml:
         default_args = {'owner': 'deeptendies',
                         'start_date': datetime(2021, 11, 1),
                         'retries': 3,
-                        'retry_delay': timedelta(minutes=10),
+                        'retry_delay': timedelta(minutes=1),
                         }
         schedule = dag_configs[config]['schedule']
         globals()[dag_id] = create_dag(dag_id,

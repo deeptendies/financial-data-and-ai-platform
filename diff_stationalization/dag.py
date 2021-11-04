@@ -31,7 +31,7 @@ engine = create_engine(pgURL)
 
 
 def diff_stationalization(ticker,
-                          schema = "av_data_ingestion",
+                          schema="av_data_ingestion",
                           *args, **kwargs):
     df = pd.read_sql(f"SELECT * FROM \"{schema}\".\"{ticker}\"",
                      con=engine,
@@ -46,14 +46,15 @@ def diff_stationalization(ticker,
               con=engine,
               schema='feature_engineering',
               if_exists='replace',
+              index=False,
               method='multi')
+
 
 # create dags logic
 def create_dag(dag_id,
                schedule,
                config,
                default_args):
-
     dag = DAG(dag_id,
               schedule_interval=schedule,
               default_args=default_args,
@@ -66,7 +67,7 @@ def create_dag(dag_id,
     with dag:
         for ticker in tickers:
             PythonOperator(
-                task_id=f'stock_data_ingestion_operator_{ticker}',
+                task_id=f'operator_{ticker}',
                 python_callable=diff_stationalization,
                 op_kwargs={'ticker': ticker}
             )

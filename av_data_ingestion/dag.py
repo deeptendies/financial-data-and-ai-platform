@@ -40,6 +40,7 @@ def stock_data_ingestion(ticker, *args, **kwargs):
     logging.info(df.head())
     df.to_sql(name=ticker,
               con=engine,
+              index=False,
               schema='av_data_ingestion',
               if_exists='replace')
 
@@ -49,8 +50,6 @@ def create_dag(dag_id,
                schedule,
                config,
                default_args):
-
-
     dag = DAG(dag_id,
               schedule_interval=schedule,
               default_args=default_args,
