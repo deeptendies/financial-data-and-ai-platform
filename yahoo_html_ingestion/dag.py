@@ -60,7 +60,7 @@ def ingest_html_operator(url):
 
 def execute(topic_name,
             url,
-            schema="yahoo_html_ingestion",
+            schema="yahoo_ingestion",
             *args, **kwargs):
     import re
     from datetime import date
