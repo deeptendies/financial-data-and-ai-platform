@@ -22,7 +22,7 @@ postgres_db = {'drivername': 'postgresql',
                'password': (pg_conn.password),
                'host': (pg_conn.host),
                'port': 5432,
-               'database': 'shared_sandbox'}
+               'database': 'deeptendies_sandbox'}
 pgURL = URL(**postgres_db)
 
 # pg engine
@@ -39,8 +39,8 @@ import pandas as pd
 
 
 def execute(topic_name,
-            schema="finnhub_ingestion",
-            table_name = "calendar_ingestion",
+            schema="finnhub_api_ingestion",
+            table_name = "earning_calendar",
             *args, **kwargs):
     import finnhub
     import datetime
@@ -100,7 +100,7 @@ with open(os.path.join(pwd, "config.yml"), "r") as config_yaml:
     dag_configs = yaml.load(config_yaml, Loader=yaml.FullLoader)
 
     for config in dag_configs:
-        dag_id = 'finnhub_api_ingestion_{}'.format(str(config))
+        dag_id = 'finnhub_api_ingestion_earning_calendar_{}'.format(str(config))
         default_args = {'owner': 'deeptendies',
                         'start_date': datetime(2021, 11, 1),
                         'retries': 3,

@@ -21,7 +21,7 @@ postgres_db = {'drivername': 'postgresql',
                'password': (pg_conn.password),
                'host': (pg_conn.host),
                'port': 5432,
-               'database': 'shared_sandbox'}
+               'database': 'deeptendies_sandbox'}
 pgURL = URL(**postgres_db)
 
 # pg engine

@@ -22,7 +22,7 @@ postgres_db = {'drivername': 'postgresql',
                'password': (pg_conn.password),
                'host': (pg_conn.host),
                'port': 5432,
-               'database': 'shared_sandbox'}
+               'database': 'deeptendies_sandbox'}
 pgURL = URL(**postgres_db)
 
 # pg engine
@@ -60,7 +60,7 @@ def ingest_html_operator(url):
 
 def execute(topic_name,
             url,
-            schema="yahoo_ingestion",
+            schema="yahoo_html_ingestion_misc",
             *args, **kwargs):
     import re
     from datetime import date
@@ -113,7 +113,7 @@ with open(os.path.join(pwd, "config.yml"), "r") as config_yaml:
     dag_configs = yaml.load(config_yaml, Loader=yaml.FullLoader)
 
     for config in dag_configs:
-        dag_id = 'html_ingestion_{}'.format(str(config))
+        dag_id = 'yahoo_html_ingestion_misc_{}'.format(str(config))
         default_args = {'owner': 'deeptendies',
                         'start_date': datetime(2021, 11, 1),
                         'retries': 3,
