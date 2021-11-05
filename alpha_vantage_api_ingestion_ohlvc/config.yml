@@ -1,0 +1,80 @@
+meme_stonks:
+  description: 'dags for extracting meme stonks tickers'
+  source: 'av-daily'
+  start: '2021-01-01'
+  start_date: '2021-01-01'
+  schedule: '0 14-22 * * 1-5'
+  tickers:
+    - TSLA
+    - CRSR
+    - CLOV
+    - BBBY
+    - IVR
+
+3x_fin_etf:
+  description: 'dags for extracting 3x leveraged etf tickers'
+  source: 'av-daily'
+  start: '2021-01-01'
+  start_date: '2021-01-01'
+  schedule: '1 14-22 * * 1-5'
+  tickers:
+    - FAS
+    - FAZ
+
+3x_qqq_etf:
+  description: 'dags for extracting 3x bear bull tickers'
+  source: 'av-daily'
+  start: '2021-01-01'
+  start_date: '2021-01-01'
+  schedule: '2 14-22 * * 1-5'
+  tickers:
+    - SQQQ
+    - TQQQ
+
+3x_cn_etf:
+  description: 'dags for extracting 5 tickers'
+  source: 'av-daily'
+  start: '2021-01-01'
+  start_date: '2021-01-01'
+  schedule: '3 14-22 * * 1-5'
+  tickers:
+    - YINN
+    - YANG
+
+3x_vix:
+  description: 'dags for extracting 5 tickers'
+  source: 'av-daily'
+  start: '2021-01-01'
+  start_date: '2021-01-01'
+  schedule: '4 14-22 * * 1-5'
+  tickers:
+    - UVXY
+    - SVXY
+
+
+scion_asset_management_1:
+  description: 'Fund by Michael Burry'
+  source: 'av-daily'
+  start: '2021-01-01'
+  start_date: '2021-01-01'
+  schedule: '5 14-22 * * 1-5'
+  tickers:
+    - VYGG
+    - GOGL
+    - MRNS
+    - STNG
+    - CVS
+
+
+scion_asset_management_2:
+  description: 'Fund by Michael Burry'
+  source: 'av-daily'
+  start: '2021-01-01'
+  start_date: '2021-01-01'
+  schedule: '6 14-22 * * 1-5'
+  tickers:
+    - GEO
+    - OVV
+    - DISCA
+    - WMT
+    - MCK

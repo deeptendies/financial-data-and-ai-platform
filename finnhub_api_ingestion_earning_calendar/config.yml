@@ -1,0 +1,4 @@
+earning_calendar:
+  description: 'finnhub earning calendar'
+  conn_id: 'finnhub_token_1'
+  schedule: '0 0 * * *'
