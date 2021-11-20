@@ -11,7 +11,11 @@ from airflow.hooks.base import BaseHook
 from airflow.operators.python import PythonOperator
 from sqlalchemy.engine.url import URL
 import pandas as pd
-import yfinance as yf
+try:
+    import yfinance as yf
+except:
+    os.system("pip install fyinance")
+    import yfinance as yf
 
 pg_conn = BaseHook.get_connection("deeptendies_postgres")
 yf_conn = BaseHook.get_connection("yahoo_fin_token_1")
