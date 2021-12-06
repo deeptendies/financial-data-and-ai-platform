@@ -1,4 +1,1 @@
-pandas
-seaborn
-mysql-connector-python
-yfinance
+plyvel
