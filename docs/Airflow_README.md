@@ -2,15 +2,15 @@
 ## What is this repo?
 This is a starter repo to get started with airflow, and to create your first DAGs with examples on how to dynamically generate them.
 
-![](img.png)
-![img_1.png](img2.png)
+![](Airflow_README/img.png)
+![img_1.png](Airflow_README/img2.png)
 
 This is based off the airflow [quickstart guide](https://airflow.apache.org/docs/apache-airflow/2.0.1/start/docker.html). It is only meant for local dev purposes only. This image extends the official image to allow installation of images during setup, with dependencies added in the `requirements.txt`. This setup is also meant for users who would like to have a quick and convenient local environment for developing dags meant to deployed to Google Cloud Composer or Astronomer. 
 
 > If you want a simple Docker-based deployment, consider using Kubernetes and deploying Airflow using the Official Airflow Community Helm Chart.
 > https://airflow.apache.org/docs/helm-chart/stable/index.html
 
-Prerequsites
+## Prerequsites
 > Before you begin
 > https://airflow.apache.org/docs/helm-chart/stable/index.html
 

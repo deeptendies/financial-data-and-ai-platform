@@ -100,7 +100,7 @@ services:
     <<: *airflow-common
     command: webserver
     ports:
-      - 80:8080
+      - 8080:8080
     healthcheck:
       test: [ "CMD", "curl", "--fail", "http://localhost:8080/health" ]
       interval: 10s
@@ -270,7 +270,7 @@ services:
       airflow-init:
         condition: service_completed_successfully
   # spark services
-  spark-master:
+  spark:
     image: docker.io/bitnami/spark:3
     environment:
       - SPARK_MODE=master
@@ -279,7 +279,7 @@ services:
       - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
       - SPARK_SSL_ENABLED=no
     ports:
-      - '8080:8080'
+      - '8082:8080'
   spark-worker-node-1:
     image: docker.io/bitnami/spark:3
     environment:
