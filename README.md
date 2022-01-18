@@ -1,5 +1,8 @@
+# Training Data Platform Engineers
+As a Data Platform Engineer, one's goal is to architect and build cloud-native data pipelines and infrastructure to perform big data analytics and machine learning.  
+
 # Base data platform stack
-A base stack development environment for prototyping and PoC-ing data platform designs.
+A development environment for prototyping and proof-of-concepting data platform designs. This repository provides pictures and scripts for quickly spinning up a tiny tech stack environment similar to what a data platform might encounter on a daily basis. This is intended for training and prototyping purposes only, and should not be used in production.  
 
 # Setup Instruction
 1. fulfill docker + docker-compose prerequisites in the airflow [README](https://github.com/stancsz/base-data-platform-stack/blob/main/docs/Airflow_README.md)
