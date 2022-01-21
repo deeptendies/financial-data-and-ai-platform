@@ -312,7 +312,7 @@ services:
     ports:
       - "8888:8888"
     volumes:
-      - ./work:/home/jovyan/work
+      - ./projects/jupyter:/home/jovyan/work
 
 volumes:
   postgres-db-volume:

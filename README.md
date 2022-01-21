@@ -1,4 +1,4 @@
-# Training Data Platform Engineers
+# Training Data Platform Engineer
 As a Data Platform Engineer, one's goal is to architect and build cloud-native data pipelines and infrastructure to perform big data analytics and machine learning.  
 
 # Base data platform stack
