@@ -135,3 +135,6 @@ dmypy.json
 dags
 logs
 plugins
+
+# Postgres
+data
