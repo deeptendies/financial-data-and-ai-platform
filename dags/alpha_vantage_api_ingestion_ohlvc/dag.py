@@ -9,7 +9,7 @@ from airflow.operators.python import PythonOperator
 from sqlalchemy import create_engine
 from sqlalchemy.engine.url import URL
 
-from dags.alpha_vantage_api_ingestion_ohlvc.callables import stock_data_ingestion
+from alpha_vantage_api_ingestion_ohlvc.callables import stock_data_ingestion
 
 # pull connection from airflow backend
 pg_conn = BaseHook.get_connection("deeptendies_postgres")
@@ -29,7 +29,9 @@ engine = create_engine(pgURL)
 
 
 def callable(ticker):
-    stock_data_ingestion()
+    stock_data_ingestion(ticker=ticker,
+                         api_key=av_conn.password,
+                         engine=engine)
 
 # create dags dynamically
 def create_dag(dag_id,
