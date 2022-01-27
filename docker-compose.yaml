@@ -337,6 +337,12 @@ services:
       retries: 5
     restart: always
 
+  dbt:
+    image: python:3.9
+    build:
+      context: .
+      dockerfile: Dockerfile_dbt
+
 volumes:
   postgres-db-volume:
   postgres-example-db-volume:

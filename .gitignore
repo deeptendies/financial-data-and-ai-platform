@@ -135,5 +135,6 @@ dmypy.json
 dags
 logs
 plugins
-logs
-.env
+
+# Postgres
+data
