@@ -1,21 +1,21 @@
-import logging
 import os
 from datetime import datetime
 from datetime import timedelta
 
-import pandas_datareader as pdr
 import yaml
 from airflow import DAG
 from airflow.hooks.base import BaseHook
 from airflow.operators.python import PythonOperator
+from sqlalchemy import create_engine
 from sqlalchemy.engine.url import URL
 
-# pull connection from airflow
+from dags.alpha_vantage_api_ingestion_ohlvc.callables import stock_data_ingestion
+
+# pull connection from airflow backend
 pg_conn = BaseHook.get_connection("deeptendies_postgres")
 av_conn = BaseHook.get_connection("alpha_vantage_token_1")
 
 # Defining pgURL
-
 postgres_db = {'drivername': 'postgresql',
                'username': (pg_conn.login),
                'password': (pg_conn.password),
@@ -25,27 +25,13 @@ postgres_db = {'drivername': 'postgresql',
 pgURL = URL(**postgres_db)
 
 # pg engine
-from sqlalchemy import create_engine
-
 engine = create_engine(pgURL)
 
 
-def stock_data_ingestion(ticker, *args, **kwargs):
-    source = 'av-daily'
-    start = '2021-01-01'
-    df = pdr.data.DataReader(ticker.upper(),
-                             data_source=source,
-                             start=start,
-                             api_key=(av_conn.password))
-    logging.info(df.head())
-    df.to_sql(name=ticker,
-              con=engine,
-              index=False,
-              schema='alpha_vantage_api_ingestion_ohlvc',
-              if_exists='replace')
+def callable(ticker):
+    stock_data_ingestion()
 
-
-# create dags logic
+# create dags dynamically
 def create_dag(dag_id,
                schedule,
                config,
@@ -63,7 +49,7 @@ def create_dag(dag_id,
         for ticker in tickers:
             PythonOperator(
                 task_id=f'alpha_vantage_api_ingestion_ohlvc_operator_{ticker}',
-                python_callable=stock_data_ingestion,
+                python_callable=callable,
                 op_kwargs={'ticker': ticker}
             )
     return dag

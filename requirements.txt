@@ -1,1 +1,5 @@
+apache-airflow
+pyyaml
 pandas
+sqlalchemy
+pandas-datareader
