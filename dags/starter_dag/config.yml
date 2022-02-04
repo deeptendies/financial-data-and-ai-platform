@@ -1,0 +1,8 @@
+starter_dag_1:
+  description: 'this is a dynamically generated dag'
+  schedule: '0 0 * * *'
+  parameter_example: 'dag 1''s parameter'
+starter_dag_2:
+  description: 'this is another dynamically generated dag'
+  schedule: '0 1 * * *'
+  parameter_example: 'dag 2''s paramter'
