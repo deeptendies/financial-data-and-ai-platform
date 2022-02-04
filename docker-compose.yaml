@@ -270,78 +270,78 @@ services:
       airflow-init:
         condition: service_completed_successfully
   # spark services
-  spark:
-    image: docker.io/bitnami/spark:3
-    environment:
-      - SPARK_MODE=master
-      - SPARK_RPC_AUTHENTICATION_ENABLED=no
-      - SPARK_RPC_ENCRYPTION_ENABLED=no
-      - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
-      - SPARK_SSL_ENABLED=no
-    ports:
-      - '8082:8080'
-  spark-worker-node-1:
-    image: docker.io/bitnami/spark:3
-    environment:
-      - SPARK_MODE=worker
-      - SPARK_MASTER_URL=spark://spark:7077
-      - SPARK_WORKER_MEMORY=1G
-      - SPARK_WORKER_CORES=1
-      - SPARK_RPC_AUTHENTICATION_ENABLED=no
-      - SPARK_RPC_ENCRYPTION_ENABLED=no
-      - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
-      - SPARK_SSL_ENABLED=no
-  spark-worker-node-2:
-    image: docker.io/bitnami/spark:3
-    environment:
-      - SPARK_MODE=worker
-      - SPARK_MASTER_URL=spark://spark:7077
-      - SPARK_WORKER_MEMORY=1G
-      - SPARK_WORKER_CORES=1
-      - SPARK_RPC_AUTHENTICATION_ENABLED=no
-      - SPARK_RPC_ENCRYPTION_ENABLED=no
-      - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
-      - SPARK_SSL_ENABLED=no
-
-  # jupyter notebook for all-spark
-  all-spark-notebook:
-    image: docker.io/jupyter/all-spark-notebook
-    environment:
-      - JUPYTER_ENABLE_LAB=yes
-    command: [ "jupyter", "lab", "--no-browser", "--NotebookApp.token=''", "--NotebookApp.password=''" ]
-    ports:
-      - "8888:8888"
-    volumes:
-      - ./projects/jupyter:/home/jovyan/work
-
-  adminer:
-    image: adminer
-    restart: always
-    ports:
-      - 8084:8080
-
-  postgres-example:
-    image: postgres:14
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: postgres
-    ports:
-      - 5432:5432
-    volumes:
-      - postgres-example-db-volume:/var/lib/postgresql/data
-
-    healthcheck:
-      test: [ "CMD", "pg_isready", "-U", "airflow" ]
-      interval: 5s
-      retries: 5
-    restart: always
-
-  dbt:
-    image: python:3.9
-    build:
-      context: .
-      dockerfile: Dockerfile_dbt
+#  spark:
+#    image: docker.io/bitnami/spark:3
+#    environment:
+#      - SPARK_MODE=master
+#      - SPARK_RPC_AUTHENTICATION_ENABLED=no
+#      - SPARK_RPC_ENCRYPTION_ENABLED=no
+#      - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
+#      - SPARK_SSL_ENABLED=no
+#    ports:
+#      - '8082:8080'
+#  spark-worker-node-1:
+#    image: docker.io/bitnami/spark:3
+#    environment:
+#      - SPARK_MODE=worker
+#      - SPARK_MASTER_URL=spark://spark:7077
+#      - SPARK_WORKER_MEMORY=1G
+#      - SPARK_WORKER_CORES=1
+#      - SPARK_RPC_AUTHENTICATION_ENABLED=no
+#      - SPARK_RPC_ENCRYPTION_ENABLED=no
+#      - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
+#      - SPARK_SSL_ENABLED=no
+#  spark-worker-node-2:
+#    image: docker.io/bitnami/spark:3
+#    environment:
+#      - SPARK_MODE=worker
+#      - SPARK_MASTER_URL=spark://spark:7077
+#      - SPARK_WORKER_MEMORY=1G
+#      - SPARK_WORKER_CORES=1
+#      - SPARK_RPC_AUTHENTICATION_ENABLED=no
+#      - SPARK_RPC_ENCRYPTION_ENABLED=no
+#      - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
+#      - SPARK_SSL_ENABLED=no
+#
+#  # jupyter notebook for all-spark
+#  all-spark-notebook:
+#    image: docker.io/jupyter/all-spark-notebook
+#    environment:
+#      - JUPYTER_ENABLE_LAB=yes
+#    command: [ "jupyter", "lab", "--no-browser", "--NotebookApp.token=''", "--NotebookApp.password=''" ]
+#    ports:
+#      - "8888:8888"
+#    volumes:
+#      - ./projects/jupyter:/home/jovyan/work
+#
+#  adminer:
+#    image: adminer
+#    restart: always
+#    ports:
+#      - 8084:8080
+#
+#  postgres-example:
+#    image: postgres:14
+#    environment:
+#      POSTGRES_USER: postgres
+#      POSTGRES_PASSWORD: postgres
+#      POSTGRES_DB: postgres
+#    ports:
+#      - 5432:5432
+#    volumes:
+#      - postgres-example-db-volume:/var/lib/postgresql/data
+#
+#    healthcheck:
+#      test: [ "CMD", "pg_isready", "-U", "airflow" ]
+#      interval: 5s
+#      retries: 5
+#    restart: always
+#
+#  dbt:
+#    image: python:3.9
+#    build:
+#      context: .
+#      dockerfile: Dockerfile_dbt
 
 volumes:
   postgres-db-volume:

@@ -12,7 +12,7 @@ from airflow.operators.python import PythonOperator
 from sqlalchemy.engine.url import URL
 
 # pull connection from airflow
-from dags.auto_arima_forecaster.callables import auto_arima
+from auto_arima_forecaster.callables import auto_arima
 
 pg_conn = BaseHook.get_connection("deeptendies_postgres")
 
