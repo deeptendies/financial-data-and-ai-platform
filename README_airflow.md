@@ -62,6 +62,35 @@ docker exec -it airflow-docker_airflow-webserver_1 /bin/bash
 ```
 
 
+# setup credentials
+docker exec and enter the webserver container bash 
+
+```
+sudo docker exec -it financial-data-and-ai-platform_airflow-webserver_1 bash
+```
+
+![img.png](docs/img3.png)
+
+[running add credential commands](https://docs.google.com/document/d/1PmeCxyVF5WK4og61llRTeOc0aVYtCmTA9gGq8140gjc)
+
+```
+[2022-02-04 04:07:15,412] {crypto.py:82} WARNING - empty cryptography key - values will not be stored encrypted.
+Successfully added `conn_id`=deeptendies_postgres : postgres://postgres:******@34.71.18.220:5432
+default@647230b710b4:/opt/airflow$ 
+default@647230b710b4:/opt/airflow$ airflow connections add 'alpha_vantage_token_1' \
+>     --conn-type 'http'\
+>     --conn-password 'LFWD4YE9SYNLQ7HB'
+[2022-02-04 04:07:17,235] {crypto.py:82} WARNING - empty cryptography key - values will not be stored encrypted.
+Successfully added `conn_id`=alpha_vantage_token_1 : http://:******@:
+default@647230b710b4:/opt/airflow$     
+default@647230b710b4:/opt/airflow$ airflow connections add 'finnhub_token_1' \
+>     --conn-type 'http'\
+>     --conn-password 'c61pn3aad3if6r7ltdv0'
+[2022-02-04 04:07:18,984] {crypto.py:82} WARNING - empty cryptography key - values will not be stored encrypted.
+Successfully added `conn_id`=finnhub_token_1 : http://:******@:
+
+```
+
 # Clean up environment
 > https://airflow.apache.org/docs/apache-airflow/stable/start/docker.html#cleaning-up-the-environment
 

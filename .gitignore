@@ -144,7 +144,6 @@ dmypy.json
 .idea
 
 # Airflow
-dags
 logs
 plugins
 
