@@ -8,6 +8,7 @@ maintained by
 [@mklasby](https://github.com/mklasby) 
 [@markomijovic](https://github.com/markomijovic) 
 [@stancsz](https://github.com/stancsz)
+[@erikawyt](https://github.com/erikawyt)
 
 ## Technology
 A data platform consist of 
