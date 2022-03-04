@@ -1,6 +1,6 @@
 import os
 import pandas as pd
-from plugins.services.airflow.engine import deeptendies_engine
+from services.airflow.engine import deeptendies_engine
 try:
     import yfinance as yf
 except:

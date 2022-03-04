@@ -5,7 +5,7 @@ from datetime import timedelta
 import yaml
 from airflow import DAG
 from airflow.operators.python import PythonOperator
-from plugins.services.yahoo.yahoo_finance import get_hist_price_data
+from services.yahoo.yahoo_finance import get_hist_price_data
 
 
 def create_dag(topic_name,
