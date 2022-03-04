@@ -145,7 +145,6 @@ dmypy.json
 
 # Airflow
 logs
-plugins
 
 # Postgres
 data
