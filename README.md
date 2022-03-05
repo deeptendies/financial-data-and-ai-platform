@@ -1,5 +1,5 @@
 # Financial Data and AI Platform
-## Purpose
+## Intro
 A data platform for ingesting, transforming data, and run financial and analytical jobs.
 
 maintained by
@@ -22,36 +22,12 @@ Jobs
 - spark jobs
 - Kafka streaming apps
 
-# Training Data Platform Engineer
-As a Data Platform Engineer, one's goal is to architect and build cloud-native data pipelines and infrastructure to perform big data analytics and end-to-end machine learning projects.
-## Training objectives
-- Fundamentals of DevOps
-  - Using docker and docker-compose
-  - Manage docker containers via Terraform
-- Airflow
-  - Setting up airflow with docker
-  - Writing your first dags
-- Spark
-  - Working with spark and jupyter lab 
-  - Write a scala/python app to read from a s3 bucket
-- Kafka
-  - Build a Kafka services to produce/consume events
-  - Kafka connect
-  - processing events with KSQL stream
-- DBT
-  - To spin up the dbt only, use `docker-compose up --build -d dbt`, following `docker exec -it base-data-platform-stack_dbt_1 bash` to entre the environment
-  - Getting started with DBT
-  - Using DBT with Airflow
-- End-to-end ML project capstone
-  - EDA with Jupyter Lab
-  - How to process & run ML project, the big data style  
-  - Build an end-to-end ML project with BigQuery ML
+Training: 
 
-# Base data platform stack
-A development environment for prototyping and proof-of-concepting data platform designs. This repository provides pictures and scripts for quickly spinning up a tiny tech stack environment similar to what a data platform might encounter on a daily basis. This is intended for training and prototyping purposes only, and should not be used in production.  
+https://github.com/stancsz/training-data-platform-engineer
 
 # Setup Instruction
-1. fulfill docker + docker-compose prerequisites in the airflow [README](https://github.com/stancsz/base-data-platform-stack/blob/main/docs/Airflow_README.md)
+1. fulfill docker + docker-compose prerequisites in the airflow
 2. run the following code to export environment variables for airflow 
 ```
 mkdir -p ./dags ./logs ./plugins
@@ -74,15 +50,8 @@ docker-compose up
 
 ## Airflow UI
 http://localhost:8080/
-![img.png](docs/README/img.png)
 
-## Spark UI
-http://localhost:8082/
-![img_1.png](docs/README/img_1.png)
 
-## Jupyter Lab
-http://localhost:8888/
-![img_2.png](docs/README/img_2.png)
 
 # Docker Example
 ```

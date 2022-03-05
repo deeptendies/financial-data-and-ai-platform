@@ -18,7 +18,7 @@ except:
     import yfinance as yf
 
 pg_conn = BaseHook.get_connection("deeptendies_postgres")
-yf_conn = BaseHook.get_connection("yahoo_fin_token_1")
+# yf_conn = BaseHook.get_connection("yahoo_fin_token_1")
 
 postgres_db = {
     'drivername': 'postgresql',
