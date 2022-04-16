@@ -45,7 +45,7 @@ docker-compose up
 ```
 if running in daemon is preferred
 ```
-docker-compose up
+docker-compose up -d
 ```
 
 ## Airflow UI
